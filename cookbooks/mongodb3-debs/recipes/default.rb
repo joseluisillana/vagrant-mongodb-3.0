@@ -20,16 +20,16 @@
 
 include_recipe "mongodb3-debs::repo"
 
-package "mongodb-3.0"
+package "mongodb-org"
 
-service "mongodb" do
+service "mongod" do
   action [ :enable, :start ]
 end
 
-template "/etc/mongodb.conf" do
+template "/etc/mongod.conf" do
   source "mongodb.conf.erb"
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, resources(:service => "mongodb")
+  notifies :restart, resources(:service => "mongod")
 end
